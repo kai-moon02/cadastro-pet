@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>revisão javascript</title>
+    <style>
+        input {
+            font-family: Helvetica, sans-serif;
+            font-size: 40px;
+            border: solid 1px;
+            border-color: white;
+            background-color: black;
+            color: white;
+            display: block;
+            margin-bottom: 15px;
+        }
+        h2 {
+            font-family: Helvetica, sans-serif;
+            text-transform: uppercase;
+            font-size: 40px;
+            background-color: blueviolet;
+            color: indianred; /* Corrigido de indianreds para indianred */
+            display: table-column;
+            padding-left: 20px;
+        }
+        body {
+            font-family: Helvetica, sans-serif;
+            font-size: 40px;
+            background-image: url(patas.WEBP);
+            background-color: #222; /* Fundo escuro caso a imagem não carregue */
+            color: white;
+        }
+        h3 {
+            font-family: Helvetica, sans-serif;
+            text-transform: uppercase;
+            font-size: 40px;
+            background-color: white;
+            color: royalblue;
+            padding-left: 30px;
+            padding-bottom: 10px;
+            border: solid 1px;
+            border-color: white;
+        }
+        label {
+            color: dodgerblue;
+        }
+    </style>
+    <script>
+        function cadastrarNome() {
+            let nome = document.getElementById('inputName').value;
+            let idade = document.getElementById('numberIdade').value;
+            let Raça = document.getElementById('inputRaca').value;
+            let Dona = document.getElementById('inputDona').value;
+            let Endereço = document.getElementById('inputEnde').value;
+
+            document.getElementById('exibidorTexto').innerHTML = 
+                "O nome do seu pet: " + nome + "<br>" + 
+                "a idade dele é: " + idade + " anos" + "<br>" + 
+                "sua raça é: " + Raça + "<br>" + 
+                "A dona é: " + Dona + "<br>" + 
+                "O seu endereço é: " + Endereço;
+        }
+
+        function enviar() {
+            // Capturando todos os valores corretamente antes de gerar o arquivo
+            let nome = document.getElementById('inputName').value;
+            let idade = document.getElementById('numberIdade').value;
+            let raca = document.getElementById('inputRaca').value;
+            let dona = document.getElementById('inputDona').value;
+            let endereco = document.getElementById('inputEnde').value; // Corrigido o ID para 'inputEnde'
+
+            // Montando o texto que vai dentro do arquivo TXT
+            let texto = "O nome do seu pet: " + nome + "\n";
+            texto += "A idade dele é: " + idade + " anos\n";
+            texto += "A raça é: " + raca + "\n";
+            texto += "A dona é: " + dona + "\n";
+            texto += "O endereço é: " + endereco + "\n";
+
+            let arquivo = new Blob([texto], { type: "text/plain" });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(arquivo);
+            link.download = "cadastro.txt";
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+    </script>
+</head>
+<body>
+
+    <label for="inputName">Digite o nome do pet:</label>
+    <input type="text" id="inputName">
+
+    <label for="numberIdade">Idade:</label>
+    <input type="number" id="numberIdade">
+
+    <label for="inputRaca">Raça:</label>
+    <input type="text" id="inputRaca">
+
+    <label for="inputDona">Nome da dona:</label>
+    <input type="text" id="inputDona">
+
+    <label for="inputEnde">Endereço:</label>
+    <input type="text" id="inputEnde">
+
+    <!-- Botão de cadastrar na tela -->
+    <input type="button" value="cadastrar" onclick="cadastrarNome()">
+    
+    <!-- Novo botão adicionado para acionar a função de download -->
+    <input type="button" value="abaixar cadastro" onclick="enviar()"> 
+    
+    <br>
+    <h3 id="exibidorTexto"></h3>
+
+</body>
+</html>
